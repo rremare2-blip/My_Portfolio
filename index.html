@@ -147,6 +147,7 @@ section {
   display: flex;
   gap: 1rem;
   justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
   margin-bottom: 2rem;
 }
@@ -193,34 +194,95 @@ section {
 
 .about-content {
   display: grid;
-  grid-template-columns: 300px 1fr;
-  gap: 3rem;
+  grid-template-columns: 1fr 300px; 
+  gap: 2rem;
   align-items: start;
+}
+
+/* FORCE IMAGE TO THE RIGHT SIDE */
+.about-photo {
+  order: 2;            /* image on right */
+  position: relative;
+  margin-top: 70px;
+  width: 300px;
+  justify-self: end;
+}
+
+.about-text {
+  order: 1;            /* text on left */
+}
+
+.about-photo::before {
+  content: '';
+  position: absolute;
+  top: -15px;
+  left: -15px;
+  right: 15px;
+  bottom: 15px;
+  border: 2px solid var(--accent);
+  border-radius: 20px;
+  z-index: -1;
 }
 
 .about-photo img {
   width: 100%;
-  border-radius: 16px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 229, 204, 0.2);
+  transition: all 0.3s ease;
+  display: block;
+  position: relative;
+  background: var(--card-bg);
+  border: 2px solid var(--border);
 }
 
-.about-text h2 { font-size: 2.5rem; margin-bottom: 1.5rem; color: var(--accent); }
+.about-photo img:hover {
+  transform: translate(8px, 8px);
+  box-shadow: 0 10px 40px rgba(0, 229, 204, 0.3);
+}
 
-.about-text p { font-size: 1.1rem; margin-bottom: 1rem; color: var(--text-muted); }
+.about-text h2 { 
+  font-size: 2.8rem; 
+  margin-bottom: 1.5rem; 
+  color: var(--accent);
+  font-weight: 800;
+  position: relative;
+  display: inline-block;
+}
+
+.about-text h2::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 60%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent) 0%, transparent 100%);
+  border-radius: 2px;
+}
+
+.about-text p { 
+  font-size: 1.1rem; 
+  margin-bottom: 1rem; 
+  color: var(--text-muted); 
+}
+
 
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 1.5rem;
-  margin-top: 2rem;
 }
 
+/* MODIFIED: Add position: relative and overflow: hidden */
 .skill-card {
   background: var(--card-bg);
   padding: 1.5rem;
   border-radius: 12px;
   border: 1px solid var(--border);
   transition: all 0.3s;
+  cursor: pointer; 
+  position: relative; 
+  overflow: hidden;
 }
 
 .skill-card:hover {
@@ -229,9 +291,110 @@ section {
   box-shadow: 0 10px 30px rgba(0, 229, 204, 0.1);
 }
 
-.skill-card h3 { font-size: 1.3rem; margin-bottom: 0.75rem; color: var(--primary); }
+/* MODIFIED: Set h3 text color to primary */
+.skill-card h3 { 
+  font-size: 1rem; 
+  margin: 0; 
+  color: hsl(173, 59%, 76%); 
+}
 
-.skill-card p { color: var(--text-muted); font-size: 0.95rem; }
+/* NEW: Style the wrapped icon with the accent color */
+.skill-icon {
+    color: var(--accent);
+    margin-right: 8px; 
+}
+
+
+/* Positioned ">>" indicator (from previous request) */
+.skill-card::after {
+    content: '>>'; 
+    position: absolute;
+    bottom: 10px;    
+    right: 15px;     
+    color: var(--accent);
+    font-size: 1.2rem; 
+    font-weight: 700;
+    transition: transform 0.3s ease;
+    z-index: 10;
+}
+
+/* Hover effect on the arrow */
+.skill-card:hover::after {
+    transform: translateX(3px) scale(1.05);
+}
+
+.skill-card p { display: none; } /* Hide old description paragraphs */
+
+
+/* --- MODAL CSS --- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  display: none; /* Initially hidden */
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.modal-content {
+  background: var(--bg-secondary);
+  border: 2px solid var(--accent);
+  border-radius: 12px;
+  padding: 30px;
+  max-width: 450px;
+  width: 90%;
+  transform: translateY(-50px);
+  transition: transform 0.3s ease;
+  position: relative;
+  box-shadow: 0 15px 40px rgba(0, 229, 204, 0.3);
+}
+
+.modal-content h3 {
+  color: var(--accent);
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.modal-content p {
+  color: var(--text);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.modal-close:hover {
+  color: var(--primary);
+}
+
+/* Modal visibility class (JS will add this) */
+.modal-overlay.open {
+  display: flex;
+  opacity: 1;
+}
+
+.modal-overlay.open .modal-content {
+  transform: translateY(0);
+}
+/* --- END MODAL CSS --- */
+
 
 .stack-tags { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1rem; }
 
@@ -256,9 +419,9 @@ section {
 
 .section-title p { color: var(--text-muted); font-size: 1.1rem; }
 
-.projects-grid, .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+.projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
 
-.project-card, .blog-card, .education-card {
+.project-card, .education-card {
   background: var(--card-bg);
   border: 1px solid var(--border);
   border-radius: 16px;
@@ -266,33 +429,26 @@ section {
   transition: all 0.3s;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 }
 
-.project-card:hover, .blog-card:hover, .education-card:hover {
+.project-card:hover, .education-card:hover {
   transform: translateY(-10px);
   border-color: var(--accent);
   box-shadow: 0 15px 40px rgba(0, 229, 204, 0.15);
 }
 
-.project-card h3, .blog-card h3 { font-size: 1.5rem; margin-bottom: 1rem; color: var(--primary); }
+.project-card h3,  h3 { font-size: 1.5rem; margin-bottom: 1rem; color: var(--primary); }
 
-.project-card p, .blog-card p, .education-card p {
+.project-card p, .education-card p {
   color: var(--text-muted);
   margin-bottom: 1rem;
   line-height: 1.6;
+  flex-grow: 1;
 }
 
-.blog-card .blog-date { color: var(--accent); font-size: 0.9rem; margin-bottom: 0.5rem; font-weight: 600; }
-
-.blog-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
-
-.blog-tag {
-  background: rgba(0, 229, 204, 0.1);
-  color: var(--accent);
-  padding: 0.25rem 0.75rem;
-  border-radius: 15px;
-  font-size: 0.85rem;
-  border: 1px solid var(--accent);
+.project-card .btn, .btn {
+  margin-top: auto;
 }
 
 .contact-form {
@@ -338,8 +494,15 @@ footer {
 @media (max-width: 768px) {
   .skills-grid { grid-template-columns: 1fr; }
   .about-content { grid-template-columns: 1fr; text-align: center; }
-  .cta-buttons { flex-direction: column; align-items: center; }
-  .btn { width: 100%; max-width: 300px; }
+  .cta-buttons { 
+    flex-direction: column; 
+    align-items: stretch;
+  }
+  .btn { 
+    width: 100%; 
+    max-width: 300px;
+    justify-content: center;
+  }
 }
 </style>
 </head>
@@ -355,7 +518,6 @@ footer {
       <li><a href="#home" data-section="home" class="active">Home</a></li>
       <li><a href="#about" data-section="about">About</a></li>
       <li><a href="#projects" data-section="projects">Projects</a></li>
-      <li><a href="#blog" data-section="blog">Blog</a></li>
       <li><a href="#contact" data-section="contact">Contact</a></li>
     </ul>
   </div>
@@ -389,26 +551,23 @@ footer {
         <h2>About Me</h2>
         <p>Hi, I'm <strong>Marie Rosales</strong>, a passionate data analyst and developer dedicated to crafting secure, scalable, and user-friendly digital solutions.</p>
         <p>I specialize in <strong>React Native</strong>, <strong>Firebase</strong>, and <strong>PHP/MySQL</strong>, combining data analytics, application development, and cybersecurity principles to deliver impactful projects.</p>
-        <div class="skills-grid">
-          <div class="skill-card">
-            <h3>📊 Data Analytics</h3>
-            <p>Transforming raw data into actionable insights. Experienced with Python, Excel and dashboard design for informed decision-making.</p>
+        
+                <div class="skills-grid" style="margin-top: 10px;">
+          <div class="skill-card" data-title="📊 Data Analytics" data-description="Transforming raw data into actionable insights. Experienced with Python, Excel and dashboard design for informed decision-making.">
+            <h3><span class="skill-icon">📊</span> Data Analytics</h3>
           </div>
-          <div class="skill-card">
-            <h3>💻 Web & Mobile Development</h3>
-            <p>Building responsive, scalable applications with React Native, Firebase, and PHP/MySQL. Focused on clean architecture, performance, and usability.</p>
+          <div class="skill-card" data-title="💻 Web & Mobile Development" data-description="Building responsive, scalable applications with React Native, Firebase, and PHP/MySQL. Focused on clean architecture, performance, and usability.">
+            <h3><span class="skill-icon">💻</span> Web & Mobile Development</h3>
           </div>
-          <div class="skill-card">
-            <h3>🛡️ Cybersecurity</h3>
-            <p>Implementing secure coding practices, input validation, session management, and OWASP-compliant testing to protect applications from threats.</p>
+          <div class="skill-card" data-title="🛡️ Cybersecurity" data-description="Implementing secure coding practices, input validation, session management, and OWASP-compliant testing to protect applications from threats.">
+            <h3><span class="skill-icon">🛡️</span> Cybersecurity</h3>
           </div>
-          <div class="skill-card">
-            <h3>🎨 UI/UX Research</h3>
-            <p>Designing intuitive, accessible, and engaging interfaces. Skilled in usability testing, interaction design, and human-centered problem solving.</p>
+          <div class="skill-card" data-title="🎨 UI/UX Research" data-description="Designing intuitive, accessible, and engaging interfaces. Skilled in usability testing, interaction design, and human-centered problem solving.">
+            <h3><span class="skill-icon">🎨</span> UI/UX Research</h3>
           </div>
         </div>
-        <div style="margin-top: 48px;">
-          <h2>🧰 Tech Stack</h2>
+        <div style="margin-top: 60px;">
+          <h2>Tech Stack</h2>
           <p style="margin-bottom: 20px;">Here are the tools and technologies I use to turn ideas into secure, data-driven, and scalable solutions:</p>
           <div class="stack-tags">
             <span class="tech-tag" title="Core programming language for front-end and mobile apps">JavaScript</span>
@@ -437,50 +596,17 @@ footer {
       <div class="project-card">
         <h3>📱 Work for Me App</h3>
         <p>A service platform connecting Merchants, Taskers, and Doers. Built with React Native and Firebase for seamless task management and real-time updates.</p>
-        <a href="https://github.com/marierosales/workforme" target="_blank" class="btn btn-secondary">View on GitHub</a>
+        <a href="https://www.canva.com/design/DAGkCrUpc2U/eE4thz8QCp8X4FFQuxMNfw/view?utm_content=DAGkCrUpc2U&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h5ffcfcb5a4" target="_blank" class="btn btn-secondary">View Promotional Flyer</a>
       </div>
       <div class="project-card">
         <h3>💚 HopeCare Mental Health Website</h3>
-        <p>Responsive website for a mental health organization providing resources and support. Built using HTML, CSS, JavaScript, and React Native conversion.</p>
-        <a href="https://github.com/marierosales/hopecare" target="_blank" class="btn btn-secondary">View on GitHub</a>
+        <p>Responsive website for a mental health organization providing resources and support. Built using PHP, HTML, CSS, JavaScript, and React Native conversion.</p>
+        <a href="https://webdreamer2.com" target="_blank" class="btn btn-secondary">View Live Website</a>
       </div>
       <div class="project-card">
         <h3>📊 LocalEase Market Analytics</h3>
         <p>Data analytics dashboard analyzing sales performance of a local online store. Built with Python and Excel/Power BI for visualization and actionable insights.</p>
-        <a href="#" class="btn btn-secondary">Read More</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="blog" class="fade-in">
-  <div class="container">
-    <div class="section-title">
-      <h2>Blog</h2>
-      <p>Insights, tutorials, and tech explorations from my journey as a developer and data analyst.</p>
-    </div>
-    <div class="blog-grid">
-      <div class="blog-card">
-        <div class="blog-date">Nov 17, 2025</div>
-        <h3>Enhancing React Native App UI/UX</h3>
-        <p>Tips and best practices for building user-friendly, responsive, and accessible interfaces in React Native apps with Firebase backend.</p>
-        <div class="blog-tags">
-          <span class="blog-tag">React Native</span>
-          <span class="blog-tag">UI/UX</span>
-          <span class="blog-tag">Firebase</span>
-        </div>
-        <a href="#" class="btn btn-secondary">Read More</a>
-      </div>
-      <div class="blog-card">
-        <div class="blog-date">Oct 25, 2025</div>
-        <h3>Data Analytics for Small Businesses</h3>
-        <p>Using Python, Excel, and Power BI to analyze sales data and extract actionable insights to improve decision-making for small enterprises.</p>
-        <div class="blog-tags">
-          <span class="blog-tag">Data Analytics</span>
-          <span class="blog-tag">Python</span>
-          <span class="blog-tag">Power BI</span>
-        </div>
-        <a href="#" class="btn btn-secondary">Read More</a>
+        <a href="https://dataanalysisact3.streamlit.app" class="btn btn-secondary">View Dashboard Analysis</a>
       </div>
     </div>
   </div>
@@ -501,25 +627,40 @@ footer {
   </div>
 </section>
 
+<div id="skillModal" class="modal-overlay">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <h3 id="modalTitle"></h3>
+    <p id="modalDescription"></p>
+  </div>
+</div>
+
 <footer>
   <p>&copy; 2025 Marie Rosales. Built with ❤️ using HTML, CSS & JavaScript.</p>
 </footer>
 
 <script>
+// Toggle navigation menu visibility
 function toggleMenu() {
   const navLinks = document.getElementById('navLinks');
   navLinks.classList.toggle('active');
 }
 
-// Smooth scroll
+// Smooth scroll and active link functionality
 document.querySelectorAll('.nav-links a').forEach(anchor => {
   anchor.addEventListener('click', function(e) {
     e.preventDefault();
-    document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+    const targetSection = document.querySelector(this.getAttribute('href'));
+    targetSection.scrollIntoView({ behavior: 'smooth' });
+    
+    // Update active class for navigation
+    const navLinks = document.querySelectorAll('.nav-links a');
+    navLinks.forEach(link => link.classList.remove('active'));
+    this.classList.add('active');
   });
 });
 
-// Fade in on scroll
+// Fade in on scroll functionality
 const faders = document.querySelectorAll('.fade-in');
 const appearOptions = { threshold: 0.3, rootMargin: "0px 0px -50px 0px" };
 
@@ -533,26 +674,46 @@ const appearOnScroll = new IntersectionObserver((entries, observer) => {
 
 faders.forEach(fader => appearOnScroll.observe(fader));
 
-// Section navigation
-const sections = document.querySelectorAll('section');
-const navLinks = document.querySelectorAll('.nav-links a');
 
-function showSection(sectionId) {
-  sections.forEach(sec => sec.style.display = 'none');
-  const target = document.getElementById(sectionId);
-  if(target) target.style.display = 'flex';
-  navLinks.forEach(link => link.classList.remove('active'));
-  const activeLink = document.querySelector(`.nav-links a[href="#${sectionId}"]`);
-  if(activeLink) activeLink.classList.add('active');
+/* --- Modal Functions --- */
+const skillModal = document.getElementById('skillModal');
+const modalTitle = document.getElementById('modalTitle');
+const modalDescription = document.getElementById('modalDescription');
+const skillCards = document.querySelectorAll('.skill-card');
+
+function openModal(title, description) {
+  modalTitle.textContent = title.replace(/(\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDE4F]|\uD83D[\uDE80-\uDEFF])/g, '').trim(); // Strip emojis for title in modal
+  
+  // Re-add the emoji for display if desired, or just use the clean title
+  // Since the h3 in the modal gets the accent color anyway, let's keep it simple.
+  modalTitle.innerHTML = title; 
+  modalDescription.textContent = description;
+  
+  skillModal.classList.add('open');
+  document.body.style.overflow = 'hidden'; // Prevent background scrolling
 }
 
-showSection('home');
-navLinks.forEach(link => {
-  link.addEventListener('click', function(e){
-    e.preventDefault();
-    const sectionId = this.getAttribute('href').substring(1);
-    showSection(sectionId);
+function closeModal() {
+  skillModal.classList.remove('open');
+  document.body.style.overflow = ''; // Restore background scrolling
+}
+
+// Event listener for skill card clicks
+skillCards.forEach(card => {
+  card.addEventListener('click', () => {
+    const rawTitle = card.querySelector('h3').innerHTML;
+    const description = card.getAttribute('data-description');
+    
+    // Pass the raw HTML content of h3 to openModal to handle the span
+    openModal(rawTitle, description);
   });
+});
+
+// Close modal when clicking outside of it (on the overlay)
+skillModal.addEventListener('click', (e) => {
+  if (e.target === skillModal) {
+    closeModal();
+  }
 });
 </script>
 </body>
