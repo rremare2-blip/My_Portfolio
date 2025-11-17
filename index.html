@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Marie Rosales | Portfolio</title>
+<meta name="description" content="Portfolio of Marie Rosales — Data Analyst, Developer, and Cybersecurity Enthusiast.">
+<meta property="og:title" content="Marie Rosales | Portfolio">
+<meta property="og:description" content="Turning Data & Code Into Impact.">
+<meta property="og:image" content="thumbnail.jpg">
+<meta name="theme-color" content="#00e5cc">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+:root {
+  --primary: #e0e0e0;
+  --accent: #00e5cc;
+  --bg: #0a0a0a;
+  --bg-secondary: #121212;
+  --card-bg: rgba(26,26,26,0.8);
+  --text: #e0e0e0;
+  --text-muted: #a0a0a0;
+  --border: #2a2a2a;
+  --glass: rgba(10,10,10,0.65);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+.bg-animation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+  animation: gradientMove 15s ease infinite;
+  z-index: -2;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.grid-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(0,229,204,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,229,204,0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  z-index: -1;
+}
+
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+  z-index: 1000;
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.6rem;
+  font-weight: 700;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+}
+
+.nav-links a {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--accent);
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: 600;
+}
+
+section {
+  min-height: 100vh;
+  padding: 100px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container { max-width: 1200px; margin: 0 auto; width: 100%; }
+
+.hero { text-align: center; }
+
+.hero h1 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle { font-size: 1.5rem; color: var(--accent); margin-bottom: 1rem; font-weight: 600; }
+
+.tagline { font-size: 1.1rem; color: var(--text-muted); max-width: 800px; margin: 0 auto 2rem; }
+
+.cta-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.btn {
+  padding: 0.875rem 1.75rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-primary { background: var(--accent); color: var(--bg); }
+
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0, 229, 204, 0.3); }
+
+.btn-secondary { background: transparent; border: 2px solid var(--accent); color: var(--accent); }
+
+.btn-secondary:hover { background: var(--accent); color: var(--bg); }
+
+.social-links { display: flex; gap: 1rem; justify-content: center; margin-top: 2rem; }
+
+.social-link {
+  width: 50px;
+  height: 50px;
+  border: 2px solid var(--border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
+  text-decoration: none;
+  transition: all 0.3s;
+  font-size: 1.2rem;
+}
+
+.social-link:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-3px); }
+
+.about-content {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.about-photo img {
+  width: 100%;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.about-text h2 { font-size: 2.5rem; margin-bottom: 1.5rem; color: var(--accent); }
+
+.about-text p { font-size: 1.1rem; margin-bottom: 1rem; color: var(--text-muted); }
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.skill-card {
+  background: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  transition: all 0.3s;
+}
+
+.skill-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent);
+  box-shadow: 0 10px 30px rgba(0, 229, 204, 0.1);
+}
+
+.skill-card h3 { font-size: 1.3rem; margin-bottom: 0.75rem; color: var(--primary); }
+
+.skill-card p { color: var(--text-muted); font-size: 0.95rem; }
+
+.stack-tags { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1rem; }
+
+.tech-tag {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  padding: 0.6rem 1.2rem;
+  border-radius: 25px;
+  font-size: 0.95rem;
+  transition: all 0.3s;
+}
+
+.tech-tag:hover {
+  border-color: var(--accent);
+  background: rgba(0, 229, 204, 0.1);
+  transform: translateY(-2px);
+}
+
+.section-title { text-align: center; margin-bottom: 3rem; }
+
+.section-title h2 { font-size: 2.5rem; color: var(--accent); margin-bottom: 0.5rem; }
+
+.section-title p { color: var(--text-muted); font-size: 1.1rem; }
+
+.projects-grid, .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+
+.project-card, .blog-card, .education-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2rem;
+  transition: all 0.3s;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-card:hover, .blog-card:hover, .education-card:hover {
+  transform: translateY(-10px);
+  border-color: var(--accent);
+  box-shadow: 0 15px 40px rgba(0, 229, 204, 0.15);
+}
+
+.project-card h3, .blog-card h3 { font-size: 1.5rem; margin-bottom: 1rem; color: var(--primary); }
+
+.project-card p, .blog-card p, .education-card p {
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.blog-card .blog-date { color: var(--accent); font-size: 0.9rem; margin-bottom: 0.5rem; font-weight: 600; }
+
+.blog-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
+
+.blog-tag {
+  background: rgba(0, 229, 204, 0.1);
+  color: var(--accent);
+  padding: 0.25rem 0.75rem;
+  border-radius: 15px;
+  font-size: 0.85rem;
+  border: 1px solid var(--accent);
+}
+
+.contact-form {
+  max-width: 600px;
+  margin: 0 auto;
+  backdrop-filter: blur(6px);
+  background: var(--glass);
+  padding: 2rem;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus { outline: none; border-color: var(--accent); }
+
+.contact-form button { width: 100%; }
+
+footer {
+  text-align: center;
+  padding: 2rem;
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border);
+  color: var(--text-muted);
+}
+
+.fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 768px) {
+  .skills-grid { grid-template-columns: 1fr; }
+  .about-content { grid-template-columns: 1fr; text-align: center; }
+  .cta-buttons { flex-direction: column; align-items: center; }
+  .btn { width: 100%; max-width: 300px; }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-animation"><div class="grid-overlay"></div></div>
+
+<nav>
+  <div class="nav-content">
+    <div class="logo">Marie<span style="color:var(--accent)">.</span>Rosales</div>
+    <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle menu">Menu</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home" data-section="home" class="active">Home</a></li>
+      <li><a href="#about" data-section="about">About</a></li>
+      <li><a href="#projects" data-section="projects">Projects</a></li>
+      <li><a href="#blog" data-section="blog">Blog</a></li>
+      <li><a href="#contact" data-section="contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section id="home" class="hero active">
+  <div class="container">
+    <h1>Turning Data & Code Into Impact</h1>
+    <p class="subtitle">Data Analyst • Web & Mobile Developer • Cybersecurity Enthusiast</p>
+    <p class="tagline">I create secure, user-centered, and data-driven solutions that empower businesses and users alike — blending analytics, design, and technology for meaningful results.</p>
+    <div class="cta-buttons">
+      <a href="#projects" class="btn btn-primary"><i class="fas fa-code"></i> Explore My Work</a>
+      <a href="#contact" class="btn btn-secondary"><i class="fas fa-envelope"></i> Connect With Me</a>
+      <a href="resume.pdf" download class="btn btn-secondary"><i class="fas fa-download"></i> Download Resume</a>
+    </div>
+    <div class="social-links">
+      <a href="https://github.com/rremare2-blip" target="_blank" class="social-link" aria-label="GitHub"><i class="fab fa-github"></i></a>
+      <a href="https://www.linkedin.com/in/marie-rosales-b187b1334/" target="_blank" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      <a href="mailto:rremare2@gmail.com" class="social-link" aria-label="Email"><i class="fas fa-envelope"></i></a>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="fade-in">
+  <div class="container">
+    <div class="about-content">
+      <div class="about-photo">
+        <img src="my_photo-removebg-preview.png" alt="Marie Rosales - Data Analyst & Developer">
+      </div>
+      <div class="about-text">
+        <h2>About Me</h2>
+        <p>Hi, I'm <strong>Marie Rosales</strong>, a passionate data analyst and developer dedicated to crafting secure, scalable, and user-friendly digital solutions.</p>
+        <p>I specialize in <strong>React Native</strong>, <strong>Firebase</strong>, and <strong>PHP/MySQL</strong>, combining data analytics, application development, and cybersecurity principles to deliver impactful projects.</p>
+        <div class="skills-grid">
+          <div class="skill-card">
+            <h3>📊 Data Analytics</h3>
+            <p>Transforming raw data into actionable insights. Experienced with Python, Excel and dashboard design for informed decision-making.</p>
+          </div>
+          <div class="skill-card">
+            <h3>💻 Web & Mobile Development</h3>
+            <p>Building responsive, scalable applications with React Native, Firebase, and PHP/MySQL. Focused on clean architecture, performance, and usability.</p>
+          </div>
+          <div class="skill-card">
+            <h3>🛡️ Cybersecurity</h3>
+            <p>Implementing secure coding practices, input validation, session management, and OWASP-compliant testing to protect applications from threats.</p>
+          </div>
+          <div class="skill-card">
+            <h3>🎨 UI/UX Research</h3>
+            <p>Designing intuitive, accessible, and engaging interfaces. Skilled in usability testing, interaction design, and human-centered problem solving.</p>
+          </div>
+        </div>
+        <div style="margin-top: 48px;">
+          <h2>🧰 Tech Stack</h2>
+          <p style="margin-bottom: 20px;">Here are the tools and technologies I use to turn ideas into secure, data-driven, and scalable solutions:</p>
+          <div class="stack-tags">
+            <span class="tech-tag" title="Core programming language for front-end and mobile apps">JavaScript</span>
+            <span class="tech-tag" title="Cross-platform mobile app framework used in most of my app projects">React Native</span>
+            <span class="tech-tag" title="Authentication, Firestore, and storage backbone for real-time apps">Firebase</span>
+            <span class="tech-tag" title="Data analysis and scripting for analytics projects">Python</span>
+            <span class="tech-tag" title="Data visualization and business intelligence tool for reporting">Power BI</span>
+            <span class="tech-tag" title="Server-side scripting for back-end and APIs">PHP</span>
+            <span class="tech-tag" title="Database management for structured data and transactions">MySQL</span>
+            <span class="tech-tag" title="Version control and collaborative development">Git</span>
+            <span class="tech-tag" title="Modern styling and responsive layout design">CSS</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects" class="fade-in">
+  <div class="container">
+    <div class="section-title">
+      <h2>My Projects</h2>
+      <p>Showcasing my work in mobile apps, web development, and analytics dashboards.</p>
+    </div>
+    <div class="projects-grid">
+      <div class="project-card">
+        <h3>📱 Work for Me App</h3>
+        <p>A service platform connecting Merchants, Taskers, and Doers. Built with React Native and Firebase for seamless task management and real-time updates.</p>
+        <a href="https://github.com/marierosales/workforme" target="_blank" class="btn btn-secondary">View on GitHub</a>
+      </div>
+      <div class="project-card">
+        <h3>💚 HopeCare Mental Health Website</h3>
+        <p>Responsive website for a mental health organization providing resources and support. Built using HTML, CSS, JavaScript, and React Native conversion.</p>
+        <a href="https://github.com/marierosales/hopecare" target="_blank" class="btn btn-secondary">View on GitHub</a>
+      </div>
+      <div class="project-card">
+        <h3>📊 LocalEase Market Analytics</h3>
+        <p>Data analytics dashboard analyzing sales performance of a local online store. Built with Python and Excel/Power BI for visualization and actionable insights.</p>
+        <a href="#" class="btn btn-secondary">Read More</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="blog" class="fade-in">
+  <div class="container">
+    <div class="section-title">
+      <h2>Blog</h2>
+      <p>Insights, tutorials, and tech explorations from my journey as a developer and data analyst.</p>
+    </div>
+    <div class="blog-grid">
+      <div class="blog-card">
+        <div class="blog-date">Nov 17, 2025</div>
+        <h3>Enhancing React Native App UI/UX</h3>
+        <p>Tips and best practices for building user-friendly, responsive, and accessible interfaces in React Native apps with Firebase backend.</p>
+        <div class="blog-tags">
+          <span class="blog-tag">React Native</span>
+          <span class="blog-tag">UI/UX</span>
+          <span class="blog-tag">Firebase</span>
+        </div>
+        <a href="#" class="btn btn-secondary">Read More</a>
+      </div>
+      <div class="blog-card">
+        <div class="blog-date">Oct 25, 2025</div>
+        <h3>Data Analytics for Small Businesses</h3>
+        <p>Using Python, Excel, and Power BI to analyze sales data and extract actionable insights to improve decision-making for small enterprises.</p>
+        <div class="blog-tags">
+          <span class="blog-tag">Data Analytics</span>
+          <span class="blog-tag">Python</span>
+          <span class="blog-tag">Power BI</span>
+        </div>
+        <a href="#" class="btn btn-secondary">Read More</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="fade-in">
+  <div class="container">
+    <div class="section-title">
+      <h2>Contact Me</h2>
+      <p>Let's discuss how I can help bring your ideas to life.</p>
+    </div>
+    <form class="contact-form" action="mailto:rremare2@gmail.com" method="post" enctype="text/plain">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
+      <button type="submit" class="btn btn-primary">Send Message</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2025 Marie Rosales. Built with ❤️ using HTML, CSS & JavaScript.</p>
+</footer>
+
+<script>
+function toggleMenu() {
+  const navLinks = document.getElementById('navLinks');
+  navLinks.classList.toggle('active');
+}
+
+// Smooth scroll
+document.querySelectorAll('.nav-links a').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+  });
+});
+
+// Fade in on scroll
+const faders = document.querySelectorAll('.fade-in');
+const appearOptions = { threshold: 0.3, rootMargin: "0px 0px -50px 0px" };
+
+const appearOnScroll = new IntersectionObserver((entries, observer) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    entry.target.classList.add('visible');
+    observer.unobserve(entry.target);
+  });
+}, appearOptions);
+
+faders.forEach(fader => appearOnScroll.observe(fader));
+
+// Section navigation
+const sections = document.querySelectorAll('section');
+const navLinks = document.querySelectorAll('.nav-links a');
+
+function showSection(sectionId) {
+  sections.forEach(sec => sec.style.display = 'none');
+  const target = document.getElementById(sectionId);
+  if(target) target.style.display = 'flex';
+  navLinks.forEach(link => link.classList.remove('active'));
+  const activeLink = document.querySelector(`.nav-links a[href="#${sectionId}"]`);
+  if(activeLink) activeLink.classList.add('active');
+}
+
+showSection('home');
+navLinks.forEach(link => {
+  link.addEventListener('click', function(e){
+    e.preventDefault();
+    const sectionId = this.getAttribute('href').substring(1);
+    showSection(sectionId);
+  });
+});
+</script>
+</body>
+</html>
