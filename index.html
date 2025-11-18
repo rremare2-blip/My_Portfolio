@@ -504,6 +504,164 @@ footer {
     justify-content: center;
   }
 }
+@media (max-width: 768px) {
+  /* Navigation improvements */
+  .menu-toggle { display: block; }
+  
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: var(--bg-secondary);
+    flex-direction: column;
+    gap: 0;
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    border-bottom: 1px solid var(--border);
+  }
+  
+  .nav-links.active {
+    max-height: 300px;
+  }
+  
+  .nav-links li {
+    padding: 1rem 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+  
+  /* Hero section */
+  .hero h1 { font-size: 2rem; }
+  .subtitle { font-size: 1.2rem; }
+  .tagline { font-size: 1rem; padding: 0 1rem; }
+  
+  /* Buttons */
+  .cta-buttons { 
+    flex-direction: column; 
+    align-items: stretch;
+    padding: 0 1rem;
+  }
+  .btn { 
+    width: 100%; 
+    max-width: 100%;
+    justify-content: center;
+  }
+  
+  /* Social links */
+  .social-link {
+    width: 45px;
+    height: 45px;
+    font-size: 1.1rem;
+  }
+  
+  /* About section */
+  .about-content { 
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .about-photo {
+    order: 1;
+    width: 200px;
+    margin: 0 auto;
+    justify-self: center;
+  }
+  
+  .about-text {
+    order: 2;
+    text-align: left;
+  }
+  
+  .about-text h2 { 
+    font-size: 2rem;
+  }
+  
+  .about-text h2::after {
+    width: 80%;
+  }
+  
+  /* Skills grid */
+  .skills-grid { 
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  
+  .skill-card {
+    padding: 1rem;
+  }
+  
+  .skill-card h3 {
+    font-size: 0.9rem;
+  }
+  
+  /* Tech stack */
+  .stack-tags {
+    gap: 0.5rem;
+  }
+  
+  .tech-tag {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+  }
+  
+  /* Projects */
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .project-card {
+    padding: 1.5rem;
+  }
+  
+  /* Section titles */
+  .section-title h2 {
+    font-size: 2rem;
+  }
+  
+  .section-title p {
+    font-size: 1rem;
+  }
+  
+  /* Modal */
+  .modal-content {
+    width: 95%;
+    padding: 20px;
+  }
+  
+  .modal-content h3 {
+    font-size: 1.5rem;
+  }
+  
+  /* General spacing */
+  section {
+    padding: 80px 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Extra small screens */
+  .hero h1 { font-size: 1.75rem; }
+  .subtitle { font-size: 1.1rem; }
+  
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .about-photo {
+    width: 180px;
+  }
+  
+  .nav-content {
+    padding: 1rem;
+  }
+  
+  .logo {
+    font-size: 1.3rem;
+  }
+}
 </style>
 </head>
 <body>
@@ -618,12 +776,32 @@ footer {
       <h2>Contact Me</h2>
       <p>Let's discuss how I can help bring your ideas to life.</p>
     </div>
-    <form class="contact-form" action="mailto:rremare2@gmail.com" method="post" enctype="text/plain">
+
+    <section id="contact" class="fade-in">
+  <div class="container">
+    <div class="section-title">
+      <h2>Contact Me</h2>
+      <p>Let's discuss how I can help bring your ideas to life.</p>
+    </div>
+
+    <!-- Formspree Contact Form -->
+    <form id="contactForm" class="contact-form" action="https://formspree.io/f/mvglprjy" method="POST">
       <input type="text" name="name" placeholder="Your Name" required>
       <input type="email" name="email" placeholder="Your Email" required>
       <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
-      <button type="submit" class="btn btn-primary">Send Message</button>
+      <button type="submit" class="btn btn-primary">
+        <i class="fas fa-paper-plane"></i> Send Message
+      </button>
     </form>
+
+    <!-- Success message (hidden by default) -->
+    <div id="successMessage" class="success-message" style="display: none;">
+      <div class="success-content">
+        <i class="fas fa-check-circle"></i>
+        <h3>Message Sent Successfully!</h3>
+        <p>Thank you for reaching out. I'll get back to you as soon as possible.</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -714,6 +892,31 @@ skillModal.addEventListener('click', (e) => {
   if (e.target === skillModal) {
     closeModal();
   }
+});
+const form = document.getElementById('contactForm');
+const successMessage = document.getElementById('successMessage');
+
+form.addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  const formData = new FormData(form);
+  
+  fetch(form.action, {
+    method: 'POST',
+    body: formData,
+    headers: { 'Accept': 'application/json' }
+  })
+  .then(response => {
+    if (response.ok) {
+      successMessage.style.display = 'block';
+      form.reset();
+    } else {
+      alert('Oops! There was a problem submitting your form.');
+    }
+  })
+  .catch(() => {
+    alert('Oops! There was a problem submitting your form.');
+  });
 });
 </script>
 </body>
