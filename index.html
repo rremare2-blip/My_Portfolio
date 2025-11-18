@@ -199,9 +199,8 @@ section {
   align-items: start;
 }
 
-/* FORCE IMAGE TO THE RIGHT SIDE */
 .about-photo {
-  order: 2;            /* image on right */
+  order: 2;
   position: relative;
   margin-top: 70px;
   width: 300px;
@@ -209,7 +208,7 @@ section {
 }
 
 .about-text {
-  order: 1;            /* text on left */
+  order: 1;
 }
 
 .about-photo::before {
@@ -266,14 +265,12 @@ section {
   color: var(--text-muted); 
 }
 
-
 .skills-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1.5rem;
 }
 
-/* MODIFIED: Add position: relative and overflow: hidden */
 .skill-card {
   background: var(--card-bg);
   padding: 1.5rem;
@@ -291,21 +288,17 @@ section {
   box-shadow: 0 10px 30px rgba(0, 229, 204, 0.1);
 }
 
-/* MODIFIED: Set h3 text color to primary */
 .skill-card h3 { 
   font-size: 1rem; 
   margin: 0; 
   color: hsl(173, 59%, 76%); 
 }
 
-/* NEW: Style the wrapped icon with the accent color */
 .skill-icon {
     color: var(--accent);
     margin-right: 8px; 
 }
 
-
-/* Positioned ">>" indicator (from previous request) */
 .skill-card::after {
     content: '>>'; 
     position: absolute;
@@ -318,15 +311,12 @@ section {
     z-index: 10;
 }
 
-/* Hover effect on the arrow */
 .skill-card:hover::after {
     transform: translateX(3px) scale(1.05);
 }
 
-.skill-card p { display: none; } /* Hide old description paragraphs */
+.skill-card p { display: none; }
 
-
-/* --- MODAL CSS --- */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -335,7 +325,7 @@ section {
   height: 100%;
   background: rgba(0, 0, 0, 0.85);
   backdrop-filter: blur(8px);
-  display: none; /* Initially hidden */
+  display: none;
   align-items: center;
   justify-content: center;
   z-index: 2000;
@@ -384,7 +374,6 @@ section {
   color: var(--primary);
 }
 
-/* Modal visibility class (JS will add this) */
 .modal-overlay.open {
   display: flex;
   opacity: 1;
@@ -393,8 +382,6 @@ section {
 .modal-overlay.open .modal-content {
   transform: translateY(0);
 }
-/* --- END MODAL CSS --- */
-
 
 .stack-tags { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1rem; }
 
@@ -438,7 +425,7 @@ section {
   box-shadow: 0 15px 40px rgba(0, 229, 204, 0.15);
 }
 
-.project-card h3,  h3 { font-size: 1.5rem; margin-bottom: 1rem; color: var(--primary); }
+.project-card h3, h3 { font-size: 1.5rem; margin-bottom: 1rem; color: var(--primary); }
 
 .project-card p, .education-card p {
   color: var(--text-muted);
@@ -479,6 +466,58 @@ section {
 
 .contact-form button { width: 100%; }
 
+/* Success message styles - UPDATED Z-INDEX */
+.success-message {
+  position: fixed;
+  top: 100px;
+  right: 20px;
+  background: var(--bg-secondary);
+  border: 2px solid var(--accent);
+  border-radius: 12px;
+  padding: 20px 30px;
+  box-shadow: 0 10px 40px rgba(0, 229, 204, 0.3);
+  z-index: 9999;
+  transform: translateX(400px);
+  opacity: 0;
+  transition: all 0.5s ease;
+  pointer-events: none;
+}
+
+.success-message.show {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.success-message.hide {
+  transform: translateX(400px);
+  opacity: 0;
+}
+
+.success-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+}
+
+.success-content i {
+  font-size: 3rem;
+  color: var(--accent);
+}
+
+.success-content h3 {
+  color: var(--accent);
+  font-size: 1.3rem;
+  margin: 0;
+}
+
+.success-content p {
+  color: var(--text);
+  font-size: 1rem;
+  margin: 0;
+}
+
 footer {
   text-align: center;
   padding: 2rem;
@@ -504,8 +543,8 @@ footer {
     justify-content: center;
   }
 }
+
 @media (max-width: 768px) {
-  /* Navigation improvements */
   .menu-toggle { display: block; }
   
   .nav-links {
@@ -532,12 +571,10 @@ footer {
     border-bottom: 1px solid var(--border);
   }
   
-  /* Hero section */
   .hero h1 { font-size: 2rem; }
   .subtitle { font-size: 1.2rem; }
   .tagline { font-size: 1rem; padding: 0 1rem; }
   
-  /* Buttons */
   .cta-buttons { 
     flex-direction: column; 
     align-items: stretch;
@@ -549,14 +586,12 @@ footer {
     justify-content: center;
   }
   
-  /* Social links */
   .social-link {
     width: 45px;
     height: 45px;
     font-size: 1.1rem;
   }
   
-  /* About section */
   .about-content { 
     grid-template-columns: 1fr;
     gap: 2rem;
@@ -582,7 +617,6 @@ footer {
     width: 80%;
   }
   
-  /* Skills grid */
   .skills-grid { 
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
@@ -596,7 +630,6 @@ footer {
     font-size: 0.9rem;
   }
   
-  /* Tech stack */
   .stack-tags {
     gap: 0.5rem;
   }
@@ -606,7 +639,6 @@ footer {
     font-size: 0.85rem;
   }
   
-  /* Projects */
   .projects-grid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
@@ -616,7 +648,6 @@ footer {
     padding: 1.5rem;
   }
   
-  /* Section titles */
   .section-title h2 {
     font-size: 2rem;
   }
@@ -625,7 +656,6 @@ footer {
     font-size: 1rem;
   }
   
-  /* Modal */
   .modal-content {
     width: 95%;
     padding: 20px;
@@ -635,14 +665,30 @@ footer {
     font-size: 1.5rem;
   }
   
-  /* General spacing */
   section {
     padding: 80px 15px;
+  }
+  
+  .success-message {
+    right: 10px;
+    left: 10px;
+    padding: 15px 20px;
+  }
+  
+  .success-content i {
+    font-size: 2.5rem;
+  }
+  
+  .success-content h3 {
+    font-size: 1.1rem;
+  }
+  
+  .success-content p {
+    font-size: 0.9rem;
   }
 }
 
 @media (max-width: 480px) {
-  /* Extra small screens */
   .hero h1 { font-size: 1.75rem; }
   .subtitle { font-size: 1.1rem; }
   
@@ -710,7 +756,7 @@ footer {
         <p>Hi, I'm <strong>Marie Rosales</strong>, a passionate data analyst and developer dedicated to crafting secure, scalable, and user-friendly digital solutions.</p>
         <p>I specialize in <strong>React Native</strong>, <strong>Firebase</strong>, and <strong>PHP/MySQL</strong>, combining data analytics, application development, and cybersecurity principles to deliver impactful projects.</p>
         
-                <div class="skills-grid" style="margin-top: 10px;">
+        <div class="skills-grid" style="margin-top: 10px;">
           <div class="skill-card" data-title="📊 Data Analytics" data-description="Transforming raw data into actionable insights. Experienced with Python, Excel and dashboard design for informed decision-making.">
             <h3><span class="skill-icon">📊</span> Data Analytics</h3>
           </div>
@@ -777,7 +823,6 @@ footer {
       <p>Let's discuss how I can help bring your ideas to life.</p>
     </div>
 
-    <!-- Formspree Contact Form -->
     <form id="contactForm" class="contact-form" action="https://formspree.io/f/mvglprjy" method="POST">
       <input type="text" name="name" placeholder="Your Name" required>
       <input type="email" name="email" placeholder="Your Email" required>
@@ -787,7 +832,6 @@ footer {
       </button>
     </form>
 
-    <!-- Success message (hidden by default) -->
     <div id="successMessage" class="success-message" style="display: none;">
       <div class="success-content">
         <i class="fas fa-check-circle"></i>
@@ -828,6 +872,9 @@ document.querySelectorAll('.nav-links a').forEach(anchor => {
     const navLinks = document.querySelectorAll('.nav-links a');
     navLinks.forEach(link => link.classList.remove('active'));
     this.classList.add('active');
+    
+    // Close mobile menu after clicking
+    document.getElementById('navLinks').classList.remove('active');
   });
 });
 
@@ -845,28 +892,23 @@ const appearOnScroll = new IntersectionObserver((entries, observer) => {
 
 faders.forEach(fader => appearOnScroll.observe(fader));
 
-
-/* --- Modal Functions --- */
+// Modal Functions
 const skillModal = document.getElementById('skillModal');
 const modalTitle = document.getElementById('modalTitle');
 const modalDescription = document.getElementById('modalDescription');
 const skillCards = document.querySelectorAll('.skill-card');
 
 function openModal(title, description) {
-  modalTitle.textContent = title.replace(/(\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDE4F]|\uD83D[\uDE80-\uDEFF])/g, '').trim(); // Strip emojis for title in modal
-  
-  // Re-add the emoji for display if desired, or just use the clean title
-  // Since the h3 in the modal gets the accent color anyway, let's keep it simple.
   modalTitle.innerHTML = title; 
   modalDescription.textContent = description;
   
   skillModal.classList.add('open');
-  document.body.style.overflow = 'hidden'; // Prevent background scrolling
+  document.body.style.overflow = 'hidden';
 }
 
 function closeModal() {
   skillModal.classList.remove('open');
-  document.body.style.overflow = ''; // Restore background scrolling
+  document.body.style.overflow = '';
 }
 
 // Event listener for skill card clicks
@@ -874,18 +916,18 @@ skillCards.forEach(card => {
   card.addEventListener('click', () => {
     const rawTitle = card.querySelector('h3').innerHTML;
     const description = card.getAttribute('data-description');
-    
-    // Pass the raw HTML content of h3 to openModal to handle the span
     openModal(rawTitle, description);
   });
 });
 
-// Close modal when clicking outside of it (on the overlay)
+// Close modal when clicking outside of it
 skillModal.addEventListener('click', (e) => {
   if (e.target === skillModal) {
     closeModal();
   }
 });
+
+// Form submission with success message
 const form = document.getElementById('contactForm');
 const successMessage = document.getElementById('successMessage');
 
@@ -901,8 +943,25 @@ form.addEventListener('submit', function(e) {
   })
   .then(response => {
     if (response.ok) {
+      // Show the message
       successMessage.style.display = 'block';
+      setTimeout(() => {
+        successMessage.classList.add('show');
+      }, 10);
+      
       form.reset();
+      
+      // Hide the message after 3 seconds
+      setTimeout(() => {
+        successMessage.classList.remove('show');
+        successMessage.classList.add('hide');
+        
+        // Remove from DOM after animation completes
+        setTimeout(() => {
+          successMessage.style.display = 'none';
+          successMessage.classList.remove('hide');
+        }, 500);
+      }, 3000);
     } else {
       alert('Oops! There was a problem submitting your form.');
     }
